@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wall Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .clock {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hour, .minute, .second {
+            position: absolute;
+            background-color: #333;
+            transform-origin: bottom center;
+        }
+
+        .hour {
+            width: 10px;
+            height: 80px;
+            top: 70px;
+        }
+
+        .minute {
+            width: 8px;
+            height: 100px;
+            top: 50px;
+        }
+
+        .second {
+            width: 4px;
+            height: 120px;
+            top: 30px;
+            background-color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="second"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const hourDegree = (hours % 12) * 30 + (minutes / 60) * 30;
+            const minuteDegree = minutes * 6 + (seconds / 60) * 6;
+            const secondDegree = seconds * 6;
+
+            document.querySelector('.hour').style.transform = `rotate(${hourDegree}deg)`;
+            document.querySelector('.minute').style.transform = `rotate(${minuteDegree}deg)`;
+            document.querySelector('.second').style.transform = `rotate(${secondDegree}deg)`;
+        }
+
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
